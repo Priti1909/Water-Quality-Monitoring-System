@@ -1,0 +1,40 @@
+const int pHPin=A0;
+const int TurPin=A1;
+float ph;
+float pHValue=0;
+String hardness,alk;
+void setup() {
+// put your setup code here, to run once:
+Serial.begin(9600);
+pinMode(pHPin,INPUT);
+pinMode(TurPin,INPUT);
+delay(1000);
+}
+void loop(){
+int TurValue = analogRead(TurPin);
+float voltage;
+float Turbidity = TurValue * (5.0 / 1024.0);
+pHValue= analogRead(pHPin);
+voltage=pHValue*(3/4095.0);
+ph=(pHValue/60);
+Serial.print ("pH: ");
+Serial.println(ph);
+delay(500);
+if(ph > 7)
+{
+hardness="Hard";
+alk="Aklaline";
+}
+else if(ph < 7 )
+{
+hardness="Soft";
+alk="Non_Aklaline";
+}
+Serial.print(hardness);
+Serial.print(" | ");
+Serial.println(alk);
+Serial.print ("Turbidity: ");
+Serial.println (Turbidity);
+Serial.println();
+delay(1000);
+}
