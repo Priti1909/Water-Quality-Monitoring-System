@@ -1,0 +1,27 @@
+<?php
+$con = mysqli_connect("localhost", "arduino", "arduinotest", "record");
+if(!$con){
+die("connection_failed".mysqli_connect_error());
+}
+if(isset($_POST['search']))
+{
+$id=$_POST['id'];
+echo"$id";
+//echo "select * from sensor where id='$id'";
+//$sql= "select * from sensor where id='$id'";
+//$result = $conn->query($sql);
+//$data=mysli_fetch_array($sql);
+$query = mysqli_query($con, "SELECT ph, alkalinity,hardness, 
+turbidity FROM sensor WHERE id='$id'");
+$row = mysqli_fetch_array($query);
+// Get the ph
+$ph = $row["ph"];
+$alkal=$row["alkalinity"];
+$hard=$row["hardness"];
+$turbid=$row["turbidity"];
+echo $ph;
+echo $alkal;
+echo $hard;
+echo $turbid;
+}
+?>
